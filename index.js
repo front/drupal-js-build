@@ -8,10 +8,16 @@ console.log(`${chalk.red('⚒ Drupal JS Build')} [${chalk.blue(command)}]`);
 
 switch (command) {
   case 'watch':
+    if (argv.css) {
+      require('./scripts/node-sass-scss-watch');
+    }
     require('./scripts/babel-es6-watch');
     break;
   case 'build':
   default:
+    if (argv.css) {
+      require('./scripts/node-sass-scss-build');
+    }
     require('./scripts/babel-es6-build');
     break;
 }
