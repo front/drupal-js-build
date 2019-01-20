@@ -8,10 +8,24 @@ console.log(`${chalk.red('⚒ Drupal JS Build')} [${chalk.blue(command)}]`);
 
 switch (command) {
   case 'watch':
-    require('./scripts/babel-es6-watch');
+    if (argv.css || argv['only-css']) {
+      require('./scripts/node-sass-scss-watch');
+    }
+
+    if (!argv['only-css']) {
+      require('./scripts/babel-es6-watch');
+    }
+
     break;
   case 'build':
   default:
-    require('./scripts/babel-es6-build');
+    if (argv.css || argv['only-css']) {
+      require('./scripts/node-sass-scss-build');
+    }
+
+    if (!argv['only-css']) {
+      require('./scripts/babel-es6-build');
+    }
+
     break;
 }
