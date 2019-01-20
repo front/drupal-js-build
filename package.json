@@ -1,6 +1,6 @@
 {
   "name": "drupal-js-build",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Command line tool to build JS files \"the Drupal way\"™ ",
   "main": "index.js",
   "author": "",
