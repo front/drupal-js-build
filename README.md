@@ -31,3 +31,32 @@ To watch the files:
 ```
 npx drupal-js-build watch
 ```
+
+### Bonus
+This tool can also compile SASS files using `node-sass`. 
+
+The recommended folder structure is `./css/sass/[file].scss`. The files will be compiled to parent folder as `./css/[file].css`
+
+To compile js and scss files:
+
+```
+npx drupal-js-build --css
+```
+
+or
+
+```
+npx drupal-js-build watch --css
+```
+
+To compile scss files only:
+
+```
+npx drupal-js-build --only-css
+```
+
+or
+
+```
+npx drupal-js-build watch --only-css
+```
