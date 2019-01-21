@@ -1,10 +1,27 @@
 {
   "name": "drupal-js-build",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Command line tool to build JS files \"the Drupal way\"™ ",
   "main": "index.js",
-  "author": "",
-  "license": "GPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/front/drupal-js-build.git"
+  },
+  "homepage": "https://github.com/front/drupal-js-build#readme",
+  "bugs": {
+    "url": "https://github.com/front/drupal-js-build/issues"
+  },
+  "author": "The Frontkom Contributors",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "Drupal",
+    "Frontkom",
+    "Javascript",
+    "ES6",
+    "CSS",
+    "SASS",
+    "SCSS"
+  ],
   "engines": {
     "yarn": ">= 1.6",
     "node": ">= 8.11"
