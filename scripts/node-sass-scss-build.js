@@ -4,11 +4,19 @@ const changeOrAddedCss = require('./changeOrAddedCss');
 const compileCss = require('./compile-css');
 const log = require('./log');
 
+let ignoreList = [];
+
+try {
+  ignoreList = require(currentDir + '/.drupalbuild.js');
+} catch (error) {
+  // no error.
+}
+
 // Match only on .scss files.
-const fileMatch = './**/[!_]*.scss';
+const fileMatch = './css/**/[!_]*.scss';
 // Ignore everything in node_modules
 const globOptions = {
-  ignore: ['./node_modules/**'],
+  ignore: ['./node_modules/**', ...ignoreList],
 };
 
 const processFiles = (error, filePaths) => {

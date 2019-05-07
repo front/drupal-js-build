@@ -22,11 +22,21 @@ const changeOrAdded = require('./changeOrAdded');
 const check = require('./check');
 const log = require('./log');
 
+const currentDir = process.cwd();
+
+let ignoreList = [];
+
+try {
+  ignoreList = require(currentDir + '/.drupalbuild.js');
+} catch (error) {
+  // no error.
+}
+
 // Match only on .es6.js files.
 const fileMatch = './**/*.es6.js';
 // Ignore everything in node_modules
 const globOptions = {
-  ignore: ['./node_modules/**'],
+  ignore: ['./node_modules/**', ...ignoreList],
 };
 const processFiles = (error, filePaths) => {
   if (error) {

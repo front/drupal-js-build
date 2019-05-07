@@ -16,12 +16,20 @@ const chokidar = require('chokidar');
 const changeOrAdded = require('./changeOrAdded');
 const log = require('./log');
 
+let ignoreList = [];
+
+try {
+  ignoreList = require(currentDir + '/.drupalbuild.js');
+} catch (error) {
+  // no error.
+}
+
 // Match only on .es6.js files.
 const fileMatch = './**/*.es6.js';
 // Ignore everything in node_modules
 const watcher = chokidar.watch(fileMatch, {
   ignoreInitial: true,
-  ignored: ['./node_modules/**']
+  ignored: ['./node_modules/**', ...ignoreList]
 });
 
 const unlinkHandler = (err) => {
