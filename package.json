@@ -33,7 +33,6 @@
     "drupal-js-build": "./index.js"
   },
   "dependencies": {
-    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-plugin-add-header-comment": "^1.0.3",
     "babel-plugin-transform-regenerator": "^6.26.0",
@@ -58,7 +57,6 @@
     "glob": "^7.1.2",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
-    "nightwatch": "^0.9.20",
     "node-sass": "^4.11.0",
     "prettier": "^1.14.0",
     "stylelint": "^9.1.1",
