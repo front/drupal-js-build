@@ -1,8 +1,8 @@
 const glob = require('glob');
 const argv = require('minimist')(process.argv.slice(2));
 const changeOrAddedCss = require('./changeOrAddedCss');
-const compileCss = require('./compile-css');
-const log = require('./log');
+
+const currentDir = process.cwd();
 
 let ignoreList = [];
 

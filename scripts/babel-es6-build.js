@@ -20,7 +20,6 @@ const glob = require('glob');
 const argv = require('minimist')(process.argv.slice(2));
 const changeOrAdded = require('./changeOrAdded');
 const check = require('./check');
-const log = require('./log');
 
 const currentDir = process.cwd();
 

@@ -60,3 +60,16 @@ or
 ```
 npx drupal-js-build watch --only-css
 ```
+
+### Ignoring files/folders.
+
+Files may be ignored by creating a local `.drupalbuild.js` file in the working
+ directory running the script.
+ 
+ The file should export an array of glob patterns. e.g.
+ ```javascript
+module.exports = [
+  // Don't include the local ignore-me folder.
+  './ignore-me/**'
+];
+```

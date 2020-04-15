@@ -16,6 +16,8 @@ const chokidar = require('chokidar');
 const changeOrAddedCss = require('./changeOrAddedCss');
 const log = require('./log');
 
+const currentDir = process.cwd();
+
 let ignoreList = [];
 
 try {
