@@ -1,22 +1,14 @@
 const glob = require('glob');
 const argv = require('minimist')(process.argv.slice(2));
 const changeOrAddedCss = require('./changeOrAddedCss');
-const compileCss = require('./compile-css');
-const log = require('./log');
 
-let ignoreList = [];
-
-try {
-  ignoreList = require(currentDir + '/.drupalbuild.js');
-} catch (error) {
-  // no error.
-}
+const drupalBuild = require('./drupalBuild');
 
 // Match only on .scss files.
-const fileMatch = './css/**/[!_]*.scss';
+const fileMatch = drupalBuild.files.scssSrc;
 // Ignore everything in node_modules
 const globOptions = {
-  ignore: ['./node_modules/**', ...ignoreList],
+  ignore: ['./node_modules/**', ...drupalBuild.ignoreList],
 };
 
 const processFiles = (error, filePaths) => {
