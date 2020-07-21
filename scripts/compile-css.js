@@ -17,15 +17,14 @@ module.exports = (filePath, callback) => {
     file: filePath,
     outFile: destinationCss,
   },(err, result) => {
-    if (drupalBuild.cssHeader) {
-      result.css = drupalBuild.cssHeader + result.css;
-    }
-
     if (err) {
-      log(chalk.red(err));
+      log(chalk.red(err.formatted || err));
       process.exitCode = 1;
     }
     else {
+      if (drupalBuild.cssHeader) {
+        result.css = drupalBuild.cssHeader + result.css;
+      }
       callback(result);
     }
   });
