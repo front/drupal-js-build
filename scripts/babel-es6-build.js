@@ -20,23 +20,14 @@ const glob = require('glob');
 const argv = require('minimist')(process.argv.slice(2));
 const changeOrAdded = require('./changeOrAdded');
 const check = require('./check');
-const log = require('./log');
 
-const currentDir = process.cwd();
-
-let ignoreList = [];
-
-try {
-  ignoreList = require(currentDir + '/.drupalbuild.js');
-} catch (error) {
-  // no error.
-}
+const drupalBuild = require('./drupalBuild');
 
 // Match only on .es6.js files.
-const fileMatch = './**/*.es6.js';
+const fileMatch = drupalBuild.files.jsSrc;
 // Ignore everything in node_modules
 const globOptions = {
-  ignore: ['./node_modules/**', ...ignoreList],
+  ignore: ['./node_modules/**', ...drupalBuild.ignoreList],
 };
 const processFiles = (error, filePaths) => {
   if (error) {

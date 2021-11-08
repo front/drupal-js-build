@@ -16,24 +16,20 @@ const chokidar = require('chokidar');
 const changeOrAdded = require('./changeOrAdded');
 const log = require('./log');
 
-let ignoreList = [];
-
-try {
-  ignoreList = require(currentDir + '/.drupalbuild.js');
-} catch (error) {
-  // no error.
-}
+const drupalBuild = require('./drupalBuild');
 
 // Match only on .es6.js files.
-const fileMatch = './**/*.es6.js';
+const fileMatch = drupalBuild.files.jsSrc;
 // Ignore everything in node_modules
 const watcher = chokidar.watch(fileMatch, {
   ignoreInitial: true,
-  ignored: ['./node_modules/**', ...ignoreList]
+  ignored: ['./node_modules/**', ...drupalBuild.ignoreList],
+  ...drupalBuild.watchSettings,
 });
 
 const unlinkHandler = (err) => {
-  if (err) {
+  if (err && err.code !== 'ENOENT') {
+    // Ignore logging if the file already doesn't exist on disk.
     log(err);
   }
 };
@@ -43,9 +39,11 @@ watcher
   .on('add', changeOrAdded)
   .on('change', changeOrAdded)
   .on('unlink', (filePath) => {
-    const fileName = filePath.slice(0, -7);
-    fs.stat(`${fileName}.js`, () => {
-      fs.unlink(`${fileName}.js`, unlinkHandler);
-    });
+    const fileName = path.basename(filePath).slice(0, -7);
+    const dir = path.dirname(filePath);
+
+    const destinationJs = path.resolve(dir, drupalBuild.files.jsDestination, `${fileName}.js`);
+
+    fs.unlink(destinationJs, unlinkHandler);
   })
   .on('ready', () => log(`Watching '${fileMatch}' for changes.`));

@@ -1,27 +1,30 @@
 const chalk = require('chalk');
-const log = require('./log');
 const sass = require('node-sass');
 const path = require('path');
+
+const log = require('./log');
+const drupalBuild = require('./drupalBuild');
 
 module.exports = (filePath, callback) => {
   const filename = path.basename(filePath).slice(0, -5);
   const dir = path.dirname(filePath);
+  const destinationCss = path.resolve(dir, drupalBuild.files.scssDestination, `${filename}.css`);
 
   sass.render({
-    file: filePath,
     outputStyle: 'expanded', // leave minification to Drupal.
-    outFile: `${dir}/../${filename}.css`,
     sourceMap: true, // or an absolute or relative (to outFile) path
+    ...drupalBuild.sassSettings,
+    file: filePath,
+    outFile: destinationCss,
   },(err, result) => {
-    result.css = `/**\n * Don't edit this file. Find all style at ./sass folder.\n **/\n${
-      result.css
-    }`;
-
     if (err) {
-      log(chalk.red(err));
+      log(chalk.red(err.formatted || err));
       process.exitCode = 1;
     }
     else {
+      if (drupalBuild.cssHeader) {
+        result.css = drupalBuild.cssHeader + result.css;
+      }
       callback(result);
     }
   });
