@@ -1,7 +1,9 @@
 const chalk = require('chalk');
 const log = require('./log');
 const drupalBuild = require('./drupalBuild');
-const babel = require('@babel/core');
+const babel = require('babel-core');
+require("babel-core/register");
+require('babel-polyfill');
 
 module.exports = (filePath, callback) => {
   // Transform the file.
