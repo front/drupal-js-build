@@ -1,9 +1,9 @@
+const path = require('path');
 const chalk = require('chalk');
 const log = require('./log');
 const drupalBuild = require('./drupalBuild');
-const babel = require('babel-core');
-require("babel-core/register");
-require('babel-polyfill');
+const babel = require('@babel/core');
+require("@babel/register");
 
 module.exports = (filePath, callback) => {
   // Transform the file.
@@ -24,6 +24,7 @@ module.exports = (filePath, callback) => {
   babel.transformFile(
     filePath,
     {
+      cwd: path.resolve(__dirname, '../'),
       sourceMaps: process.env.NODE_ENV === 'development' ? 'inline' : false,
       comments: false,
       plugins: plugins,
