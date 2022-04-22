@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const sass = require('node-sass');
+const sass = require('sass');
 const path = require('path');
 
 const log = require('./log');

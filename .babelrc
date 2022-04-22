@@ -1,16 +1,24 @@
 {
   "presets": [
 		[
-			"env", {
+			"@babel/preset-env", {
 				"targets": {
 					"browsers": [
-						"last 2 versions",
-						"IE >= 9"
+						"last 2 Chrome major versions",
+						"last 2 Firefox major versions",
+						"last 2 Safari major versions",
+						"last 2 Edge major versions",
+						"last 2 Opera versions",
+						"last 2 iOS major versions",
+						"last 1 Explorer major version",
+						"last 1 ChromeAndroid version",
+						"last 1 UCAndroid version",
+						"last 1 Samsung version",
+						"Firefox ESR"
 					]
 				}
 			}
 		],
-    "stage-0",
-    "react" 
+    "@babel/preset-react" 
   ]
 }
